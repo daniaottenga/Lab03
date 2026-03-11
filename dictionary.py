@@ -1,14 +1,17 @@
 class Dictionary:
     def __init__(self):
-        pass
+        self._lista = []
 
-    def loadDictionary(self,path):
-        pass
+    def loadDictionary(self, path: str):
+        with open(path, 'r', encoding = "utf-8") as file:
+            for line in file:
+                self._lista.append(line.strip())
+        return self._lista
 
     def printAll(self):
-        pass
-
+        for parola in self._lista:
+            print(parola)
 
     @property
     def dict(self):
-        return self._dict
+        return self._lista

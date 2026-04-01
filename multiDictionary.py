@@ -1,3 +1,4 @@
+import copy
 import dictionary as d
 import richWord as rw
 
@@ -62,15 +63,21 @@ class MultiDictionary:
             dizionario = self.spanish
 
         for parola_datradurre in words:
+            copia = copy.deepcopy(dizionario)
             parola_rw = rw.RichWord(parola_datradurre)
             corretto = False
-            for parola_tradotta in dizionario:
-                if parola_datradurre == parola_tradotta:
+            while not corretto:
+                indice = int(len(copia)/2)
+                if copia[indice] == parola_datradurre:
                     parola_rw.corretta = True
-                    corretto = True
                     break
-            if not corretto:
-                lista_sbagliate.append(parola_rw)
+                elif parola_datradurre > copia[indice]:
+                    del copia[:indice + 1]
+                else:
+                    del copia[indice:]
+                if not copia:
+                    lista_sbagliate.append(parola_datradurre)
+                    break
 
         return lista_sbagliate
 

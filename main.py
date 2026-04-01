@@ -4,7 +4,7 @@ sc = spellchecker.SpellChecker()
 
 txtIn = ""
 
-while txtIn != 4:
+while True:
 
     sc.printMenu()
     while not txtIn.isdigit():

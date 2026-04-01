@@ -3,28 +3,28 @@ import multiDictionary as md
 
 class SpellChecker:
 
-    def __init__(self):
-        self.multidict = md.MultiDictionary()
+    def __init__(self, multidict = md.MultiDictionary()):
+        self.multidict = multidict
 
     def handleSentence(self, txtIn: str, language: str):
         txtIn = replaceChars(txtIn)
         lista = txtIn.split()
 
-        inizio = time.process_time()
+        inizio = time.time()
         lista_sbagliate = self.multidict.searchWord(lista, language)
-        fine = time.process_time()
+        fine = time.time()
         stampa(lista_sbagliate, "contains", fine, inizio)
         lista_sbagliate.clear()
 
-        inizio = time.process_time()
+        inizio = time.time()
         lista_sbagliate = self.multidict.searchWordLinear(lista, language)
-        fine = time.process_time()
+        fine = time.time()
         stampa(lista_sbagliate, "Linear search", fine, inizio)
         lista_sbagliate.clear()
 
-        inizio = time.process_time()
+        inizio = time.time()
         lista_sbagliate = self.multidict.searchWordDichotomic(lista, language)
-        fine = time.process_time()
+        fine = time.time()
         stampa(lista_sbagliate, "Dichotomic search", fine, inizio)
         lista_sbagliate.clear()
 
@@ -51,6 +51,6 @@ def stampa(lista: list, using: str, fine, inizio):
     print(f"Using {using}")
     for parola in lista:
         print(parola)
-    print(f"Parole sbagliate: {len(lista)}\n")
-    print(f"Tempo di processamento: {(fine - inizio):.6f}\n")
-    print("______________________________\n")
+    print(f"Parole sbagliate: {len(lista)}\n" +
+          f"Tempo di processamento: {(fine - inizio):.6f}\n" +
+          "______________________________\n")
